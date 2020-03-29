@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import { Container, Divider } from "rsuite";
+
+import SidebarNav from "./components/SideNavBar";
+
+import "./styles/App.css";
+// import "./styles/theme.css";
+import "rsuite/dist/styles/rsuite-default.css";
+
+import Routes from "./constants/routes";
+
+function Admin() {
+  return <h1>Admin</h1>;
+}
+
+function Home() {
+  return <h1>Home</h1>;
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Container>
+        <SidebarNav />
+        <Divider style={{ height: "100vh", margin: 0 }} vertical />
+        <Container style={{ display: "flex" }}>
+          <Switch>
+            <Route path={Routes.Admin}>
+              <Admin />
+            </Route>
+            <Route path={Routes.Home}>
+              <Home />
+            </Route>
+          </Switch>
+        </Container>
+      </Container>
     </div>
   );
 }
