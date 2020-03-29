@@ -1,16 +1,16 @@
 import React from "react";
 
-import { Sidenav, Nav, Icon, Navbar, Dropdown, Sidebar } from "rsuite";
+import { Sidenav, Nav, Icon, Navbar, Dropdown, Sidebar, Divider } from "rsuite";
 
 import { Link } from "react-router-dom";
-import Routes from "../constants/routes";
+import Routes from "../../constants/routes";
 
 const headerStyles = {
   padding: 13,
   fontSize: 24,
   height: 56,
-  color: " #000",
-  background: "#ffa",
+  color: " #3e206d",
+  background: "#fff",
   whiteSpace: "nowrap",
   overflow: "hidden"
 };
@@ -53,7 +53,7 @@ const NavToggle = ({ expand, onChange }) => {
   );
 };
 
-class Page extends React.Component {
+class SideNavBar extends React.Component {
   constructor() {
     super();
 
@@ -86,7 +86,7 @@ class Page extends React.Component {
           flexDirection: "column",
           height: "100vh"
         }}
-        width={expand ? 260 : 56}
+        width={expand ? 200 : 56}
         expand={expand}
         collapsible
       >
@@ -96,6 +96,7 @@ class Page extends React.Component {
             <span style={{ marginLeft: 15 }}>ksorv</span>
           </div>
         </Sidenav.Header>
+        <Divider style={{ margin: 0 }} />
         <Sidenav
           onSelect={this.handleSelect}
           expand={expand}
@@ -166,6 +167,7 @@ class Page extends React.Component {
             </Nav>
           </Sidenav.Body>
         </Sidenav>
+        <Divider style={{ margin: 0 }} />
         <NavToggle expand={expand} onChange={this.handleToggle} />
       </Sidebar>
     );
@@ -184,4 +186,4 @@ const NavLink = React.forwardRef((props, ref) => {
   );
 });
 
-export default Page;
+export default SideNavBar;
