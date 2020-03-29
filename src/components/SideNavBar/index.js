@@ -152,19 +152,6 @@ class SideNavBar extends React.Component {
               >
                 Look Me Up
               </NavLink>
-              {/* <Dropdown
-                    eventKey='5'
-                    trigger='hover'
-                    title='Contact Me'
-                    icon={<Icon icon='universal-access' />}
-                    placement='rightStart'
-                  >
-                    <Dropdown.Item eventKey='4-1'>Applications</Dropdown.Item>
-                    <Dropdown.Item eventKey='4-2'>Websites</Dropdown.Item>
-                    <Dropdown.Item eventKey='4-3'>Channels</Dropdown.Item>
-                    <Dropdown.Item eventKey='4-4'>Tags</Dropdown.Item>
-                    <Dropdown.Item eventKey='4-5'>Versions</Dropdown.Item>
-                  </Dropdown> */}
             </Nav>
           </Sidenav.Body>
         </Sidenav>
