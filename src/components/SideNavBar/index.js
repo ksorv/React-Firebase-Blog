@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Sidenav, Nav, Icon, Navbar, Dropdown, Sidebar, Divider } from "rsuite";
-
+import { withHooksHOC } from "./withHooksHOC";
 // import { withRouter } from "react-router-dom";
 
 import { Link } from "react-router-dom";
@@ -56,18 +56,18 @@ const NavToggle = ({ expand, onChange }) => {
 };
 
 class SideNavBar extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       expand: true,
-      activeKey: "1"
+      activeKey: "1",
+      url: this.props.url || null
     };
 
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
   }
-
   handleSelect(eventKey) {
     this.setState({ activeKey: eventKey });
   }
@@ -102,7 +102,6 @@ class SideNavBar extends React.Component {
         <Sidenav
           onSelect={this.handleSelect}
           expand={expand}
-          defaultOpenKeys={["3"]}
           appearance='subtle'
           style={{ overflowY: "auto", flex: "1 1 auto" }}
         >
@@ -113,7 +112,7 @@ class SideNavBar extends React.Component {
                 active
                 icon={<Icon icon='home' />}
                 to={Routes.Home}
-                activekey={this.state.activeKey}
+                url={this.state.url}
               >
                 Home
               </NavLink>
@@ -122,7 +121,7 @@ class SideNavBar extends React.Component {
                 active
                 icon={<Icon icon='newspaper-o' />}
                 to={Routes.Blog}
-                activekey={this.state.activeKey}
+                url={this.state.url}
               >
                 Blog
               </NavLink>
@@ -131,16 +130,16 @@ class SideNavBar extends React.Component {
                 active
                 icon={<Icon icon='wrench' />}
                 to={Routes.Projects}
-                activekey={this.state.activeKey}
+                url={this.state.url}
               >
                 Projects
               </NavLink>
               <NavLink
                 eventKey='4'
-                active
+                active={this.state.url === Routes.Setup}
                 icon={<Icon icon='code' />}
                 to={Routes.Setup}
-                activekey={this.state.activeKey}
+                url={this.state.url}
               >
                 My Setup
               </NavLink>
@@ -149,7 +148,7 @@ class SideNavBar extends React.Component {
                 active
                 icon={<Icon icon='binoculars' />}
                 to={Routes.FindMe}
-                activekey={this.state.activeKey}
+                url={this.state.url}
               >
                 Look Me Up
               </NavLink>
@@ -182,10 +181,10 @@ const NavLink = React.forwardRef((props, ref) => {
     <Nav.Item
       {...props}
       ref={ref}
-      active={props.activekey === props.eventKey}
+      active={props.to === props.url}
       componentClass={Link}
     />
   );
 });
 
-export default SideNavBar;
+export default withHooksHOC(SideNavBar);
