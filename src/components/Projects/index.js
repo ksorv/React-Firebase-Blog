@@ -8,9 +8,10 @@ class Projects extends React.Component {
     return (
       <div>
         <h1>Projects</h1>
-        {projects.map(project => (
-          <ProjectView key={project.id} project={project} />
-        ))}
+        {projects &&
+          Object.entries(projects).map((project, k) => (
+            <ProjectView key={project[0]} project={project[1]} />
+          ))}
       </div>
     );
   }
@@ -25,7 +26,7 @@ const ProjectView = ({ project }) => (
 
 const mapStateToProps = state => {
   return {
-    projects: state.projects.projects
+    projects: state.projects
   };
 };
 

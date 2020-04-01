@@ -1,5 +1,4 @@
 import { PostManager } from "../actions/";
-import { act } from "react-dom/test-utils";
 
 export default (
   state = {
@@ -7,7 +6,7 @@ export default (
     isUpdatingPost: false,
     postError: false,
     hasFetched: false,
-    posts: []
+    posts: {}
   },
   action
 ) => {
