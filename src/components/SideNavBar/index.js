@@ -1,8 +1,15 @@
 import React from "react";
 
-import { Sidenav, Nav, Icon, Navbar, Dropdown, Sidebar, Divider } from "rsuite";
-import { withHooksHOC } from "./withHooksHOC";
-// import { withRouter } from "react-router-dom";
+import {
+  Sidenav,
+  Nav,
+  Icon,
+  Navbar,
+  // Dropdown,
+  Sidebar,
+  Divider
+  // Button
+} from "rsuite";
 
 import { Link } from "react-router-dom";
 import Routes from "../../constants/routes";
@@ -17,31 +24,17 @@ const headerStyles = {
   overflow: "hidden"
 };
 
-const iconStyles = {
-  width: 56,
-  height: 56,
-  lineHeight: "56px",
-  textAlign: "center"
-};
+// const iconStyles = {
+//   width: 56,
+//   height: 56,
+//   lineHeight: "56px",
+//   textAlign: "center"
+// };
 
 const NavToggle = ({ expand, onChange }) => {
   return (
     <Navbar appearance='subtle' className='nav-toggle'>
       <Navbar.Body>
-        <Nav>
-          <Dropdown
-            placement='topStart'
-            trigger='click'
-            renderTitle={children => {
-              return <Icon style={iconStyles} icon='cog' />;
-            }}
-          >
-            <Dropdown.Item>Tech Used</Dropdown.Item>
-            <Dropdown.Item>Dark Mode</Dropdown.Item>
-            <Dropdown.Item>Sign out</Dropdown.Item>
-          </Dropdown>
-        </Nav>
-
         <Nav pullRight>
           <Nav.Item
             onClick={onChange}
@@ -62,14 +55,24 @@ class SideNavBar extends React.Component {
     this.state = {
       expand: true,
       activeKey: "1",
-      url: this.props.url || null
+      url: null
     };
-
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
   }
+
   handleSelect(eventKey) {
     this.setState({ activeKey: eventKey });
+  }
+
+  componentDidMount() {
+    this.setState({ url: this.props.url });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.url !== this.props.url) {
+      this.setState({ url: this.props.url });
+    }
   }
 
   handleToggle() {
@@ -86,7 +89,11 @@ class SideNavBar extends React.Component {
         style={{
           display: "flex",
           flexDirection: "column",
-          height: "100vh"
+          height: "100vh",
+          position: "fixed",
+          zIndex: 3,
+          borderRight: "1px solid black",
+          padding: 3
         }}
         width={expand ? 200 : 56}
         expand={expand}
@@ -108,8 +115,6 @@ class SideNavBar extends React.Component {
           <Sidenav.Body style={{ padding: 0 }}>
             <Nav>
               <NavLink
-                eventKey='1'
-                active
                 icon={<Icon icon='home' />}
                 to={Routes.Home}
                 url={this.state.url}
@@ -117,8 +122,6 @@ class SideNavBar extends React.Component {
                 Home
               </NavLink>
               <NavLink
-                eventKey='2'
-                active
                 icon={<Icon icon='newspaper-o' />}
                 to={Routes.Blog}
                 url={this.state.url}
@@ -126,8 +129,6 @@ class SideNavBar extends React.Component {
                 Blog
               </NavLink>
               <NavLink
-                eventKey='3'
-                active
                 icon={<Icon icon='wrench' />}
                 to={Routes.Projects}
                 url={this.state.url}
@@ -135,8 +136,6 @@ class SideNavBar extends React.Component {
                 Projects
               </NavLink>
               <NavLink
-                eventKey='4'
-                active={this.state.url === Routes.Setup}
                 icon={<Icon icon='code' />}
                 to={Routes.Setup}
                 url={this.state.url}
@@ -144,8 +143,6 @@ class SideNavBar extends React.Component {
                 My Setup
               </NavLink>
               <NavLink
-                eventKey='5'
-                active
                 icon={<Icon icon='binoculars' />}
                 to={Routes.FindMe}
                 url={this.state.url}
@@ -163,7 +160,6 @@ class SideNavBar extends React.Component {
 }
 
 const NavLink = React.forwardRef((props, ref) => {
-  //   const location = useLocation();
   return (
     <Nav.Item
       {...props}
@@ -174,4 +170,4 @@ const NavLink = React.forwardRef((props, ref) => {
   );
 });
 
-export default withHooksHOC(SideNavBar);
+export default SideNavBar;

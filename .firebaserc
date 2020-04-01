@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "sauravk-vision",
+    "development": "sauravk-vision"
+  }
+}

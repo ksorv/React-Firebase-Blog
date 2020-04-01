@@ -1,0 +1,25 @@
+.remove__tag {
+  font-size: 24px !important;
+  padding: 0px 4px 0px 4px !important;
+  cursor: pointer;
+}
+.remove__tag:hover {
+  background: red;
+  padding: 0px 4px 0px 4px !important;
+  border-radius: 4px;
+}
+
+.remove__tag > a {
+  text-decoration: none !important;
+}
+
+.tag {
+  background: #d89cf6 !important;
+  font-size: 24px !important;
+  padding: 0px 0px 0px 4px !important;
+  margin: 4px;
+}
+
+.tag__input {
+  margin: 8px;
+}
