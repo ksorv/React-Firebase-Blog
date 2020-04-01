@@ -1,4 +1,6 @@
 import firebase from "../../Firebase/firebase";
+import { fetchAdminPosts } from "./posts";
+import { AdminProjectFetcher } from "./projects";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -67,6 +69,8 @@ export const loginUser = (email, password) => dispatch => {
     .signInWithEmailAndPassword(email, password)
     .then(user => {
       dispatch(receiveLogin(user));
+      dispatch(fetchAdminPosts());
+      dispatch(AdminProjectFetcher());
     })
     .catch(error => {
       //Do something with the error if you want!

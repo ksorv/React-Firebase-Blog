@@ -11,10 +11,6 @@ export default (
   action
 ) => {
   switch (action.type) {
-    case PostManager.fetchPosts:
-      return {
-        ...state
-      };
     case PostManager.requestPosts:
       return {
         ...state,

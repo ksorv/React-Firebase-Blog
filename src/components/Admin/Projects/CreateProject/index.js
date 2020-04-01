@@ -10,8 +10,8 @@ import {
   Form,
   FormControl,
   FormGroup,
-  ControlLabel
-  // Row
+  ControlLabel,
+  Toggle
 } from "rsuite";
 
 const KeyCodes = {
@@ -121,6 +121,15 @@ class CreateProject extends React.Component {
               onChange={this.handleEditorChange}
             />
           </FormGroup>
+          <div>
+            <h5>Published: </h5>
+            <Toggle
+              size='lg'
+              style={{ display: "inherit", marginBottom: 5 }}
+              checked={this.state.published}
+              onChange={this.publishHandler}
+            />
+          </div>
           <FormGroup>
             <ButtonToolbar>
               <Button appearance='primary' onClick={this.saveDraft}>

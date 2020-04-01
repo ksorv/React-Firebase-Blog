@@ -3,7 +3,6 @@ import Header from "./Header";
 
 import { Route, Redirect, useLocation, Switch } from "react-router-dom";
 
-import ProtectedRoute from "../ProtectedRoute";
 import { connect } from "react-redux";
 
 import { Container } from "rsuite";
@@ -12,7 +11,7 @@ import Posts from "./Posts";
 import Projects from "./Projects";
 
 function Admin(props) {
-  const { isAuthenticated, isVerifying } = props;
+  const { isAuthenticated } = props;
   const url = useLocation();
   return (
     <div>

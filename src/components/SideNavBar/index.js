@@ -15,7 +15,7 @@ import {
 import { logoutUser } from "../../store/actions";
 import { expand } from "../../store/actions";
 
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Routes from "../../constants/routes";
 import { connect } from "react-redux";
 

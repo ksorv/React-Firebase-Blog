@@ -11,10 +11,6 @@ export default (
   action
 ) => {
   switch (action.type) {
-    case ProjectManager.fetchProjects:
-      return {
-        ...state
-      };
     case ProjectManager.requestProjects:
       return {
         ...state,

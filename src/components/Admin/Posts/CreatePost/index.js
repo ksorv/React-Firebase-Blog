@@ -10,8 +10,8 @@ import {
   Form,
   FormControl,
   FormGroup,
-  ControlLabel
-  // Row
+  ControlLabel,
+  Toggle
 } from "rsuite";
 
 const KeyCodes = {
@@ -33,6 +33,7 @@ class CreatePost extends React.Component {
       full: "",
       image: "",
       slug: "",
+      published: false,
       tags: []
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -62,10 +63,13 @@ class CreatePost extends React.Component {
       author: form.author || "",
       content: form.content || ""
     });
-    console.log(this.state);
   };
+
   saveDraft = () => {
     //
+  };
+  publishHandler = () => {
+    this.setState({ published: !this.state.published });
   };
 
   render() {
@@ -127,9 +131,22 @@ class CreatePost extends React.Component {
               onChange={this.handleEditorChange}
             />
           </FormGroup>
+          <div>
+            <h5>Published: </h5>
+            <Toggle
+              size='lg'
+              style={{ display: "inherit", marginBottom: 5 }}
+              checked={this.state.published}
+              onChange={this.publishHandler}
+            />
+          </div>
           <FormGroup>
             <ButtonToolbar>
-              <Button appearance='primary' onClick={this.saveDraft}>
+              <Button
+                appearance='primary'
+                style={{ textAlign: "center" }}
+                onClick={this.saveDraft}
+              >
                 Submit
               </Button>
             </ButtonToolbar>
