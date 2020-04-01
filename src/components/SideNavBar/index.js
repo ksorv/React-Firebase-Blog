@@ -5,14 +5,18 @@ import {
   Nav,
   Icon,
   Navbar,
-  // Dropdown,
+  Dropdown,
   Sidebar,
   Divider
   // Button
 } from "rsuite";
 
-import { Link } from "react-router-dom";
+import { logoutUser } from "../../store/actions";
+import { expandornot } from "../../store/actions";
+
+import { Link, Redirect } from "react-router-dom";
 import Routes from "../../constants/routes";
+import { connect } from "react-redux";
 
 const headerStyles = {
   padding: 13,
@@ -24,17 +28,30 @@ const headerStyles = {
   overflow: "hidden"
 };
 
-// const iconStyles = {
-//   width: 56,
-//   height: 56,
-//   lineHeight: "56px",
-//   textAlign: "center"
-// };
+const iconStyles = {
+  width: 54,
+  height: 56,
+  lineHeight: "56px",
+  textAlign: "center"
+};
 
 const NavToggle = ({ expand, onChange }) => {
   return (
     <Navbar appearance='subtle' className='nav-toggle'>
       <Navbar.Body>
+        <Nav>
+          <Dropdown
+            placement='topStart'
+            trigger='click'
+            renderTitle={children => {
+              return <Icon style={iconStyles} icon='cog' />;
+            }}
+          >
+            <Dropdown.Item>Help</Dropdown.Item>
+            <Dropdown.Item>Dark Mode</Dropdown.Item>
+            <Dropdown.Item>Sign out</Dropdown.Item>
+          </Dropdown>
+        </Nav>
         <Nav pullRight>
           <Nav.Item
             onClick={onChange}
@@ -54,18 +71,13 @@ class SideNavBar extends React.Component {
 
     this.state = {
       expand: true,
-      activeKey: "1",
       url: null
     };
     this.handleToggle = this.handleToggle.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
-  }
-
-  handleSelect(eventKey) {
-    this.setState({ activeKey: eventKey });
   }
 
   componentDidMount() {
+    // url is coming from <App />
     this.setState({ url: this.props.url });
   }
 
@@ -75,14 +87,19 @@ class SideNavBar extends React.Component {
     }
   }
 
+  handleLogout = () => {
+    const { dispatch } = this.props;
+    dispatch(logoutUser());
+  };
+
   handleToggle() {
-    this.setState({
-      expand: !this.state.expand
-    });
+    const { dispatch } = this.props;
+    dispatch(expandornot());
   }
 
   render() {
-    const expand = this.state.expand;
+    const { expand } = this.props;
+    const { isLoggingOut, logoutError } = this.props;
 
     return (
       <Sidebar
@@ -92,8 +109,7 @@ class SideNavBar extends React.Component {
           height: "100vh",
           position: "fixed",
           zIndex: 3,
-          borderRight: "1px solid black",
-          padding: 3
+          borderRight: "1px solid black"
         }}
         width={expand ? 200 : 56}
         expand={expand}
@@ -107,7 +123,6 @@ class SideNavBar extends React.Component {
         </Sidenav.Header>
         <Divider style={{ margin: 0 }} />
         <Sidenav
-          onSelect={this.handleSelect}
           expand={expand}
           appearance='subtle'
           style={{ overflowY: "auto", flex: "1 1 auto" }}
@@ -153,6 +168,8 @@ class SideNavBar extends React.Component {
           </Sidenav.Body>
         </Sidenav>
         <Divider style={{ margin: 0 }} />
+        {isLoggingOut && <p>Logging Out....</p>}
+        {logoutError && <p>Error logging out</p>}
         <NavToggle expand={expand} onChange={this.handleToggle} />
       </Sidebar>
     );
@@ -170,4 +187,11 @@ const NavLink = React.forwardRef((props, ref) => {
   );
 });
 
-export default SideNavBar;
+function mapStateToProps(state) {
+  return {
+    isLoggingOut: state.auth.isLoggingOut,
+    logoutError: state.auth.logoutError,
+    expand: state.app.expanded
+  };
+}
+export default connect(mapStateToProps)(SideNavBar);
