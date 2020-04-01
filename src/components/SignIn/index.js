@@ -49,7 +49,7 @@ class SignIn extends React.Component {
   render() {
     const { loginError, isAuthenticated } = this.props;
     if (isAuthenticated) {
-      return <Redirect to='/' />;
+      return <Redirect to='/god/' />;
     } else {
       return (
         <Container>

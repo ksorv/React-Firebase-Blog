@@ -80,6 +80,7 @@ export const logoutUser = () => dispatch => {
     .auth()
     .signOut()
     .then(() => {
+      console.log("logOut");
       dispatch(receiveLogout());
     })
     .catch(error => {

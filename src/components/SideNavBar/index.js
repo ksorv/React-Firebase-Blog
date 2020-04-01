@@ -7,7 +7,8 @@ import {
   Navbar,
   Dropdown,
   Sidebar,
-  Divider
+  Divider,
+  Button
   // Button
 } from "rsuite";
 
@@ -35,38 +36,6 @@ const iconStyles = {
   textAlign: "center"
 };
 
-const NavToggle = ({ lock, handleLock }) => {
-  return (
-    <Navbar appearance='subtle' className='nav-toggle'>
-      <Navbar.Body>
-        <Nav pullRight>
-          <Dropdown
-            placement='topStart'
-            trigger='click'
-            renderTitle={children => {
-              return <Icon style={iconStyles} icon='cog' />;
-            }}
-          >
-            <Dropdown.Item>Help</Dropdown.Item>
-            <Dropdown.Item>Dark Mode</Dropdown.Item>
-            <Dropdown.Item>Sign out</Dropdown.Item>
-          </Dropdown>
-        </Nav>
-        {/* something if you want it someday! 
-             Just add lock in state and uncomment handleLock and then do th logics*/}
-        {/* <Nav pullRight>
-          <Nav.Item
-            onClick={handleLock}
-            style={{ width: 56, textAlign: "center" }}
-          >
-            <Icon icon={lock ? "lock" : "unlock"} />
-          </Nav.Item>
-        </Nav> */}
-      </Navbar.Body>
-    </Navbar>
-  );
-};
-
 class SideNavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -82,7 +51,7 @@ class SideNavBar extends React.Component {
   }
 
   componentDidMount() {
-    // url is coming from <App />
+    // * url is coming from <App />
     this.setState({ url: this.props.url });
   }
 
@@ -183,7 +152,37 @@ class SideNavBar extends React.Component {
           <Divider style={{ margin: 0 }} />
           {isLoggingOut && <p>Logging Out....</p>}
           {logoutError && <p>Error logging out</p>}
-          <NavToggle lock={this.state.lock} handleLock={this.handleLock} />
+          <Navbar appearance='subtle' className='nav-toggle'>
+            <Navbar.Body>
+              <Nav pullRight>
+                <Dropdown
+                  placement='topStart'
+                  trigger='click'
+                  renderTitle={children => {
+                    return <Icon style={iconStyles} icon='cog' />;
+                  }}
+                >
+                  <Dropdown.Item>Help</Dropdown.Item>
+                  <Dropdown.Item>Dark Mode</Dropdown.Item>
+                  <Dropdown.Item>
+                    <Button type='primary' onClick={this.handleLogout}>
+                      Sign out
+                    </Button>
+                  </Dropdown.Item>
+                </Dropdown>
+              </Nav>
+              {/* // !something if you want it someday! 
+             Just add lock in state and uncomment handleLock and then do th logics*/}
+              {/* <Nav pullRight>
+          <Nav.Item
+            onClick={handleLock}
+            style={{ width: 56, textAlign: "center" }}
+          >
+            <Icon icon={lock ? "lock" : "unlock"} />
+          </Nav.Item>
+        </Nav> */}
+            </Navbar.Body>
+          </Navbar>
         </Sidebar>
       </div>
     );

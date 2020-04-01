@@ -1,20 +1,40 @@
 import React from "react";
 import Header from "./Header";
 
-import { Redirect, useLocation } from "react-router-dom";
+import { Route, Redirect, useLocation, Switch } from "react-router-dom";
 
+import ProtectedRoute from "../ProtectedRoute";
 import { connect } from "react-redux";
 
 import { Container } from "rsuite";
 
+import Posts from "./Posts";
+import Projects from "./Projects";
+
 function Admin(props) {
-  const { isAuthenticated } = props;
+  const { isAuthenticated, isVerifying } = props;
   const url = useLocation();
   return (
     <div>
       <Container style={{ padding: 10 }}>
         {isAuthenticated && isAuthenticated ? (
-          <Dashboard url={url} />
+          <React.Fragment>
+            <Header url={url.pathname} />
+            <Switch>
+              <Route
+                path='/god/posts'
+                component={Posts}
+                // isAuthenticated={props.isAuthenticated}
+                // isVerifying={props.isVerifying}
+              />
+              <Route
+                path='/god/projects'
+                component={Projects}
+                // isAuthenticated={props.isAuthenticated}
+                // isVerifying={props.isVerifying}
+              />
+            </Switch>
+          </React.Fragment>
         ) : (
           <Redirect
             to={{
@@ -28,16 +48,10 @@ function Admin(props) {
   );
 }
 
-const Dashboard = props => (
-  <React.Fragment>
-    <Header url={props.url} />
-    <p>Admin hu m</p>
-  </React.Fragment>
-);
-
 function mapStateToProps(state) {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    isVerifying: state.auth.isVerifying
   };
 }
 

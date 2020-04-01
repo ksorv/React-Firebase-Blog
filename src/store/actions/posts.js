@@ -57,6 +57,7 @@ export const postFetcher = () => dispatch => {
     .then(querySnapshot => {
       var posts = {};
       querySnapshot.forEach(doc => {
+        console.log(doc.data());
         posts[doc.id] = doc.data();
       });
       dispatch(savePosts(posts));

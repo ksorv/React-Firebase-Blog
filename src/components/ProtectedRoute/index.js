@@ -7,7 +7,6 @@ const ProtectedRoute = ({
   isVerifying,
   ...rest
 }) => {
-  console.log("routing");
   return (
     <Route
       {...rest}

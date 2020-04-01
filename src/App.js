@@ -9,7 +9,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Admin from "./components/Admin";
 import SidebarNav from "./components/SideNavBar/index";
 import Blog from "./components/Blog";
-import Posts from "./components/Admin/Posts";
 import MySetup from "./components/MySetup";
 // import CreateProject from "./components/CreateProject";
 import Home from "./components/Home/index";
@@ -40,27 +39,18 @@ class App extends React.Component {
           >
             <Switch>
               <Route exact path={Routes.Home} component={Home} />
-              <ProtectedRoute
-                exact
-                path='/god/posts'
-                component={Posts}
-                isAuthenticated={isAuthenticated}
-                isVerifying={isVerifying}
-              />
-              <ProtectedRoute
-                exact
-                path='/god/projects'
-                component={Projects}
-                isAuthenticated={isAuthenticated}
-                isVerifying={isVerifying}
-              />
               <Route path='/god/signin' component={SignIn} />
-              <Route path={Routes.Admin} component={Admin} />
+              <ProtectedRoute
+                path='/god'
+                component={Admin}
+                isAuthenticated={isAuthenticated}
+                isVerifying={isVerifying}
+              />
               <Route path={Routes.Blog} component={Blog} />
               <Route path={Routes.Projects} component={Projects} />
               <Route path={Routes.Setup} component={MySetup} />
-              <Route path={Routes.Posts} component={Posts} />
               <Route path={Routes.LookMeUp} component={LookMeUp} />
+              <Route component={NoMatch} />
             </Switch>
           </Container>
         </Container>
@@ -68,6 +58,8 @@ class App extends React.Component {
     );
   }
 }
+
+const NoMatch = () => <div>Error 404</div>;
 
 function mapStateToProps(state) {
   return {

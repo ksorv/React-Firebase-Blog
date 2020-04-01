@@ -26,17 +26,18 @@ class CreatePost extends React.Component {
     super(props);
 
     this.state = {
-      title: null,
-      creation: null,
-      creator: null,
-      content: null,
-      full: null,
-      image: null,
+      title: "",
+      creation: "",
+      author: "",
+      content: "",
+      full: "",
+      image: "",
+      slug: "",
       tags: []
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
-    // this.handleDrag = this.handleDrag.bind(this);
+    this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
   handleDelete(i) {
@@ -47,23 +48,39 @@ class CreatePost extends React.Component {
   }
 
   handleAddition(tag) {
-    console.log(tag);
     this.setState(state => ({ tags: [...state.tags, tag] }));
   }
 
   handleEditorChange = e => {
-    console.log("Content was updated:", e.target.getContent());
+    this.setState({ full: e.target.getContent() });
   };
 
   handleForm = (form, event) => {
-    console.log(form, event);
+    this.setState({
+      title: form.title || "",
+      slug: form.slug || "",
+      author: form.author || "",
+      content: form.content || ""
+    });
+    console.log(this.state);
+  };
+  saveDraft = () => {
+    //
   };
 
   render() {
     const { tags } = this.state;
     return (
-      <div>
+      <div
+        style={{
+          padding: 10
+        }}
+      >
         <Form fluid onChange={this.handleForm}>
+          <FormGroup>
+            <ControlLabel>Title</ControlLabel>
+            <FormControl name='title' />
+          </FormGroup>
           <FormGroup>
             <ControlLabel>Slug</ControlLabel>
             <FormControl name='slug' />
@@ -74,7 +91,7 @@ class CreatePost extends React.Component {
           </FormGroup>
           <FormGroup>
             <ControlLabel>Textarea</ControlLabel>
-            <FormControl rows={5} name='textarea' componentClass='textarea' />
+            <FormControl rows={5} name='content' componentClass='textarea' />
           </FormGroup>
           <FormGroup>
             <ReactTags
@@ -112,8 +129,9 @@ class CreatePost extends React.Component {
           </FormGroup>
           <FormGroup>
             <ButtonToolbar>
-              <Button appearance='primary'>Submit</Button>
-              <Button appearance='default'>Cancel</Button>
+              <Button appearance='primary' onClick={this.saveDraft}>
+                Submit
+              </Button>
             </ButtonToolbar>
           </FormGroup>
         </Form>
