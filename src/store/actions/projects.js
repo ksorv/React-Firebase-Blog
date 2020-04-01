@@ -62,6 +62,7 @@ export const AdminProjectFetcher = () => dispatch => {
     .then(querySnapshot => {
       var projects = {};
       querySnapshot.forEach(doc => {
+        console.log(doc);
         projects[doc.id] = doc.data();
       });
       dispatch(saveProjects(projects));

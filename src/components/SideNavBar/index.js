@@ -48,6 +48,7 @@ class SideNavBar extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
+    this.mouseClick = this.mouseClick.bind(this);
   }
 
   componentDidMount() {
@@ -78,12 +79,21 @@ class SideNavBar extends React.Component {
     const { dispatch } = this.props;
     dispatch(expand(false));
   }
+  mouseClick() {
+    const { dispatch } = this.props;
+    const expanded = this.props.expand;
+    dispatch(expand(!expanded));
+  }
 
   render() {
     const { isLoggingOut, logoutError, expand } = this.props;
 
     return (
-      <div onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
+      <div
+        onClick={this.mouseClick}
+        onMouseEnter={this.mouseEnter}
+        onMouseLeave={this.mouseLeave}
+      >
         <Sidebar
           style={{
             display: "flex",

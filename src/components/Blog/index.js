@@ -1,6 +1,8 @@
 import React from "react";
 
 import { connect } from "react-redux";
+import { Grid, Panel } from "rsuite";
+import "./Blog.css";
 
 class Blog extends React.Component {
   render() {
@@ -8,21 +10,29 @@ class Blog extends React.Component {
     return (
       <div>
         <h1>Blog</h1>
-        {posts &&
-          Object.entries(posts).map((t, k) => (
-            <PostView key={t[0]} post={t[1]} />
-          ))}
+        <Grid fluid>
+          {posts &&
+            Object.entries(posts).map((t, k) => (
+              <PostView key={t[0]} post={t[1]} />
+            ))}
+        </Grid>
       </div>
     );
   }
 }
 
-const PostView = ({ post }) => (
-  <div>
-    <p>author: {post.author}</p>
-    <p>content: {post.content}</p>
-  </div>
-);
+const PostView = ({ post }) => {
+  return (
+    <Panel shaded bordered bodyFill>
+      <img src='https://via.placeholder.com/1920x1080' alt='' />
+      <Panel header={post.title}>
+        <p>
+          <small>{post.content}</small>
+        </p>
+      </Panel>
+    </Panel>
+  );
+};
 
 const mapStateToProps = state => {
   return {

@@ -1,0 +1,46 @@
+.rs-row {
+  border: 2px solid black;
+}
+.rs-panel img {
+  width: 100%;
+  height: auto;
+  /* max-width: 384; */
+}
+.rs-panel {
+  display: inline-block;
+  width: 85%;
+  text-align: center;
+}
+
+.rs-panel-body {
+  padding: 1px 2px !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+}
+
+.rs-panel-heading {
+  font-size: 1.5rem !important;
+  font-weight: 500 !important;
+  padding: 1px !important;
+}
+
+@media screen and (max-width: 2100px) {
+  .rs-panel {
+    width: 32%;
+    margin: 10px;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .rs-panel {
+    width: 48%;
+    margin: 10px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .rs-panel {
+    width: 97%;
+    margin: 5px;
+  }
+}

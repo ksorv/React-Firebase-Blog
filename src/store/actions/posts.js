@@ -6,6 +6,7 @@ export const PostManager = {
   updatePost: "UPDATE_POST",
   foundError: "FOUND_ERROR"
 };
+
 const savePosts = posts => {
   return {
     type: PostManager.savePosts,
@@ -43,7 +44,6 @@ export const postFetcher = () => dispatch => {
     .then(querySnapshot => {
       var posts = {};
       querySnapshot.forEach(doc => {
-        console.log(doc.data());
         posts[doc.id] = doc.data();
       });
       dispatch(savePosts(posts));

@@ -33,7 +33,7 @@ class App extends React.Component {
           <Container
             className={expand ? "expanded pres-side-bar" : "pres-side-bar"}
             style={{
-              marginLeft: expand ? 210 : 66,
+              marginLeft: 60,
               transition: "margin 500ms"
             }}
           >

@@ -22,6 +22,7 @@ class Posts extends React.Component {
         <Button onClick={this.close} appearance='primary'>
           Create New Post
         </Button>
+
         <Drawer
           full
           placement='bottom'
