@@ -8,9 +8,10 @@ class Blog extends React.Component {
     return (
       <div>
         <h1>Blog</h1>
-        {posts.map(post => (
-          <PostView key={post.id} post={post} />
-        ))}
+        {posts &&
+          Object.entries(posts).map((t, k) => (
+            <PostView key={t[0]} post={t[1]} />
+          ))}
       </div>
     );
   }
@@ -18,7 +19,7 @@ class Blog extends React.Component {
 
 const PostView = ({ post }) => (
   <div>
-    <p>title: {post.title}</p>
+    <p>author: {post.author}</p>
     <p>content: {post.content}</p>
   </div>
 );

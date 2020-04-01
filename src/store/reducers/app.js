@@ -1,12 +1,12 @@
 export default (
   state = {
-    expanded: true
+    expanded: false
   },
   action
 ) => {
   if (action.type === "EXPAND_SIDENAV") {
     return {
-      expanded: !state.expanded
+      expanded: action.expansion
     };
   } else {
     return state;

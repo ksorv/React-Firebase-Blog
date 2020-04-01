@@ -1,9 +1,10 @@
-const expandIt = () => {
+const expandIt = expansion => {
   return {
-    type: "EXPAND_SIDENAV"
+    type: "EXPAND_SIDENAV",
+    expansion
   };
 };
 
-export const expandornot = () => dispatch => {
-  dispatch(expandIt());
+export const expand = expansion => dispatch => {
+  dispatch(expandIt(expansion));
 };

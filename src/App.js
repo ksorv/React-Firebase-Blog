@@ -25,13 +25,19 @@ import "rsuite/dist/styles/rsuite-default.css";
 
 class App extends React.Component {
   render() {
-    const { isAuthenticated, isVerifying } = this.props;
+    const { isAuthenticated, isVerifying, expand } = this.props;
     return (
       <div className='App'>
         <Container>
           <SidebarNav url={this.props.location.pathname} />
 
-          <Container className='main'>
+          <Container
+            className={expand ? "expanded pres-side-bar" : "pres-side-bar"}
+            style={{
+              marginLeft: expand ? 210 : 66,
+              transition: "margin 500ms"
+            }}
+          >
             <Switch>
               <Route exact path={Routes.Home} component={Home} />
               <ProtectedRoute
@@ -66,7 +72,8 @@ class App extends React.Component {
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    isVerifying: state.auth.isVerifying
+    isVerifying: state.auth.isVerifying,
+    expand: state.app.expanded
   };
 }
 
