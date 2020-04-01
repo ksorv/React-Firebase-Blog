@@ -32,6 +32,7 @@ class CreateProject extends React.Component {
       full: "",
       image: "",
       slug: "",
+      published: false,
       tags: []
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -64,6 +65,9 @@ class CreateProject extends React.Component {
   };
   saveDraft = () => {
     //
+  };
+  publishHandler = () => {
+    this.setState({ published: !this.state.published });
   };
 
   render() {
