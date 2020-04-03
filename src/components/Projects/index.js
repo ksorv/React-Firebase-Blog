@@ -9,7 +9,7 @@ class Blog extends React.Component {
     const { projects } = this.props;
     return (
       <div>
-        <h1>Blog</h1>
+        <h1>Project</h1>
         <Grid fluid>
           {projects &&
             Object.entries(projects).map((t, k) => (
